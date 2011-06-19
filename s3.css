@@ -1,0 +1,64 @@
+/** s3 slider*/
+#slider {
+    width: 100%; /* important to be same as image width */
+    height: 260px; /* important to be same as image height */
+    position: relative; /* important */
+	overflow: hidden; /* important */
+        background: #000;
+}
+
+#sliderContent {
+   margin:0 auto;
+    position: relative;
+	top: 0;
+
+}
+.sliderImage {
+    float: none;
+    position: relative;
+	display: none;
+        width:100%;
+}
+.sliderImage div {
+    position: absolute;
+	font: 10px/15px Arial, Helvetica, sans-serif;
+    padding: 10px 13px;
+   width:auto;
+    background-color: #000;
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.7;
+	-khtml-opacity: 0.7;
+    opacity: 0.7;
+    color: #fff;
+    display: none;
+}
+
+ .sliderImage div strong {
+    font-size: 14px;
+}
+#slider .left {
+	top: 0;
+    left: 0;
+	width: 110px !important;
+	height: 220px;
+}
+#slider .right {
+	right: 0;
+	bottom: 0;
+	width: 90px !important;
+	height: 95%;}
+#slider ul#sliderContent li { list-style-type: none;}
+#slider .top {
+	top: 0;
+	left: 0;
+}
+#slider .bottom {
+	bottom: 0;
+    left: 0;
+}
+.widget-content ul li.sliderImage a {
+    padding-left:0;
+}
+.widget-content ul li.sliderImage {
+    padding:2px 0px;
+}
