@@ -3,16 +3,16 @@
  * Plugin name: Wordpress S3 Slider Widget
  * Author: Brajesh Singh
  * Plugin URI: http://buddydev.com/plugins/wordpress-s3-slider-widget/
- * Version: 1.0.1
- * Last Updated: Feb 13, 2011
+ * Version: 1.0.2
+ * Last Updated:  May 9 , 2013
  * Description: This plugin uses s3 slider by http://www.serie3.info/s3slider/. Please Note, s3 slider is licensed under Creative Commons Attribution 2.5.
  */
 class BPMag_Slideshow_Widget extends WP_Widget{
 
-  function bpmag_slideshow_widget() {
-		parent::WP_Widget( false, $name = __( 'WP S3 Slider Widget', 'bpmag' ) );
-	}
-
+  function __construct() {
+      parent::__construct(false, $name = __( 'WP S3 Slider Widget', 'bpmag' ) );
+  }
+ 
 	function widget($args, $instance) {
 		extract( $args );
 
