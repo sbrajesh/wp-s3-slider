@@ -65,13 +65,13 @@ function form($instance){
     $cat_ids=get_all_category_ids();?>
         <p>
            <label for="slide-widget-title"><?php _e('Title:', 'bpmag'); ?>
-                <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo attribute_escape( stripslashes( $title ) ); ?>" />
+                <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( stripslashes( $title ) ); ?>" />
             </label>
         </p>
 
 	<p>
             <label for="slide-widget-max-posts"><?php _e( 'Maximum No. of Posts to show' , 'bpmag'); ?>
-                <input type="text" id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" class="widefat" value="<?php echo attribute_escape( absint( $num_posts ) ); ?>" />
+                <input type="text" id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" class="widefat" value="<?php echo esc_attr( absint( $num_posts ) ); ?>" />
             </label>
 	</p>
 
@@ -88,18 +88,18 @@ function form($instance){
 
          <p>
             <label for="slide-widget-max-posts"><?php _e( 'Transition delay(In mili seconds)' , 'bpmag'); ?>
-                <input type="text" id="<?php echo $this->get_field_id( 'timeout' ); ?>" name="<?php echo $this->get_field_name( 'timeout' ); ?>" class="widefat" value="<?php echo attribute_escape( absint( $timeout ) ); ?>" />
+                <input type="text" id="<?php echo $this->get_field_id( 'timeout' ); ?>" name="<?php echo $this->get_field_name( 'timeout' ); ?>" class="widefat" value="<?php echo esc_attr( absint( $timeout ) ); ?>" />
             </label>
 	</p>
 
         <p>
             <label for="slide-widget-image-width"><?php _e( 'Image Width' , 'bpmag'); ?>
-                <input type="text" id="<?php echo $this->get_field_id( 'width' ); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" class="widefat" value="<?php echo attribute_escape( absint( $width ) ); ?>" />px
+                <input type="text" id="<?php echo $this->get_field_id( 'width' ); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" class="widefat" value="<?php echo esc_attr( absint( $width ) ); ?>" />px
             </label>
 	</p>
         <p>
             <label for="slide-widget-max-posts"><?php _e( 'Image height' , 'bpmag'); ?>
-                <input type="text" id="<?php echo $this->get_field_id( 'height' ); ?>" name="<?php echo $this->get_field_name( 'height' ); ?>" class="widefat" value="<?php echo attribute_escape( absint( $height ) ); ?>" />px
+                <input type="text" id="<?php echo $this->get_field_id( 'height' ); ?>" name="<?php echo $this->get_field_name( 'height' ); ?>" class="widefat" value="<?php echo esc_attr( absint( $height ) ); ?>" />px
             </label>
 	</p>
          <p>
@@ -155,7 +155,7 @@ function show_posts($categories,$instance){?>
 
 $rp=new WP_Query();
 
-$rp->query( array('cat'=>$categories,'posts_per_page'=>$instance['num_posts'] ));
+$rp->query( array('cat'=>$categories,'posts_per_page'=>$instance['num_posts'],'meta_key'=>'_thumbnail_id' ));
 
          if( $rp->have_posts() ) :?>
          <ul id="sliderContent">
@@ -164,14 +164,9 @@ $rp->query( array('cat'=>$categories,'posts_per_page'=>$instance['num_posts'] ))
 	<?php if(has_post_thumbnail()) : ?>
             <li class="sliderImage">
                 <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-	
-		<?php
-                if(has_post_thumbnail($rp->posts->post->ID)):?>
-                 
-                    <img src="<?php  echo bp_s3_get_custom_image_url( $rp->posts->post->ID,$instance['width'],$instance['height'] );?>"  alt="<?php the_title_attribute();?>" />
 
-               
-                <?php endif;?>
+                    <img src="<?php  echo bp_s3_get_custom_image_url(get_the_ID(),$instance['width'],$instance['height'] );?>"  alt="<?php the_title_attribute();?>" />
+                    
                 </a>
                     <div  class="<?php echo $instance['overlay_position'];?>"><strong><?php the_title();?></strong><br /><?php the_excerpt();?></div>
             </li>
